@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="../css/global.css">
 <link rel="stylesheet" href="../css/blog.css">
 <style>
-/* ── Blog Post Page Override ── 
-   blog.css sets the dark theme for the blog section.
-   These styles handle the blog-post-specific layout. */
+/* ══════════════════════════════════════════
+   Blog Post — full-width navy background
+   ══════════════════════════════════════════ */
 
-/* Force dark background for the blog post page */
-body.blog-post-page {
-  background: var(--navy);
-  color: var(--white);
+/* Override global white body for blog post pages */
+body {
+  background: var(--navy-dark) !important;
+  color: var(--white) !important;
 }
 
 /* ── Back link ── */
@@ -30,36 +30,53 @@ body.blog-post-page {
   letter-spacing: 0.06em;
   color: var(--amber);
   text-decoration: none;
-  padding: 20px 60px;
+  background: var(--navy-dark);
+  padding: 92px 60px 24px;
   transition: opacity 0.2s;
+  width: 100%;
 }
 
 .post-back:hover {
   opacity: 0.7;
 }
 
-/* ── Hero Section ── */
+/* ── Hero — full-width navy ── */
 .post-hero {
-  background: var(--navy);
-  padding: 0 60px 48px;
+  background: var(--navy-dark);
+  padding: 0 60px 56px;
+  position: relative;
+}
+
+/* Subtle grid pattern like blog hero */
+.post-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 
 .post-hero-inner {
   max-width: 1100px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* Image — fully visible, separate block */
 .post-hero-image {
   width: 100%;
-  height: 420px;
+  height: 440px;
   object-fit: cover;
   display: block;
   border-radius: 3px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
-/* Title area */
+/* Meta tags */
 .post-meta {
   display: flex;
   align-items: center;
@@ -88,48 +105,50 @@ body.blog-post-page {
   color: rgba(255,255,255,0.3);
 }
 
+/* Title */
 .post-hero-title {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(2rem, 4vw, 2.8rem);
   color: var(--white);
-  line-height: 1.2;
+  line-height: 1.15;
+  max-width: 760px;
   margin: 0 0 16px 0;
 }
 
+/* Excerpt */
 .post-hero-excerpt {
   font-family: 'Jost', sans-serif;
   font-size: 1rem;
   font-weight: 300;
   color: rgba(255,255,255,0.5);
   line-height: 1.8;
-  max-width: 640px;
-  margin: 0 0 32px 0;
+  max-width: 600px;
+  margin: 0;
 }
 
-.post-hero-rule {
-  width: 60px;
-  height: 2px;
-  background: var(--amber);
-  opacity: 0.35;
+/* ── Article Body — full-width navy ── */
+.post-article {
+  background: var(--navy-dark);
+  padding: 0 60px;
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
-/* ── Article Body ── */
-.post-body {
+.post-article-inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 48px 32px 80px;
+  padding: 56px 0 80px;
 }
 
-.post-body p {
+.post-article-inner p {
   font-family: 'Jost', sans-serif;
   font-size: 1.05rem;
   font-weight: 300;
-  color: rgba(255,255,255,0.68);
+  color: rgba(255,255,255,0.65);
   line-height: 1.95;
   margin: 0 0 28px 0;
 }
 
-.post-body h2 {
+.post-article-inner h2 {
   font-family: 'DM Serif Display', serif;
   font-size: 1.6rem;
   color: var(--white);
@@ -137,7 +156,7 @@ body.blog-post-page {
   line-height: 1.3;
 }
 
-.post-body h3 {
+.post-article-inner h3 {
   font-family: 'DM Serif Display', serif;
   font-size: 1.25rem;
   color: var(--white);
@@ -147,39 +166,39 @@ body.blog-post-page {
 
 .post-pullquote {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-style: italic;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
   line-height: 1.6;
   border-left: 3px solid var(--amber);
   padding: 8px 0 8px 28px;
-  margin: 40px 0;
-  max-width: 560px;
+  margin: 44px 0;
+  max-width: 540px;
 }
 
 /* ── CTA Section ── */
 .post-cta {
-  background: var(--navy-dark);
+  background: var(--navy);
   border-top: 1px solid rgba(255,255,255,0.07);
-  padding: 64px 32px;
+  padding: 72px 60px;
   text-align: center;
 }
 
 .post-cta-inner {
-  max-width: 560px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
 .post-cta h3 {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--white);
   margin: 0 0 12px 0;
 }
 
 .post-cta p {
   font-family: 'Jost', sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 300;
   color: rgba(255,255,255,0.45);
   line-height: 1.7;
@@ -191,11 +210,11 @@ body.blog-post-page {
   font-family: 'Jost', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--white);
   background: var(--amber);
-  padding: 14px 36px;
+  padding: 16px 36px;
   border-radius: 2px;
   text-decoration: none;
   transition: background 0.2s, transform 0.2s;
@@ -208,48 +227,63 @@ body.blog-post-page {
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .post-hero {
-    padding: 0 28px 36px;
-  }
   .post-back {
-    padding: 16px 28px;
+    padding: 92px 28px 20px;
   }
-  .post-body {
-    padding: 36px 28px 60px;
+  .post-hero {
+    padding: 0 28px 40px;
+  }
+  .post-article {
+    padding: 0 28px;
+  }
+  .post-article-inner {
+    padding: 40px 0 60px;
+  }
+  .post-cta {
+    padding: 52px 28px;
   }
 }
 
 @media (max-width: 560px) {
   .post-hero-image {
-    height: 220px;
+    height: 240px;
   }
   .post-hero-title {
-    font-size: 1.6rem;
-  }
-  .post-body {
-    padding: 32px 20px 48px;
+    font-size: 1.7rem;
   }
   .post-back {
-    padding: 14px 20px;
+    padding: 80px 20px 16px;
+  }
+  .post-hero {
+    padding: 0 20px 32px;
+  }
+  .post-article {
+    padding: 0 20px;
+  }
+  .post-article-inner {
+    padding: 32px 0 48px;
+  }
+  .post-cta {
+    padding: 40px 20px;
   }
 }
 </style>
 </head>
-<body class="blog-post-page">
+<body>
 
 <div id="nav-placeholder"></div>
 
 <!-- Back to Blog -->
 <a href="blog.html" class="post-back">← Back to Insights</a>
 
-<!-- Hero Section -->
+<!-- Hero Section — full-width navy -->
 <div class="post-hero">
   <div class="post-hero-inner">
 
     <!-- Image — fully visible, no overlay -->
     <img src="../images/blog/blogimg-workaround.jpg" alt="The Workaround That Became Permanent" class="post-hero-image">
 
-    <!-- Title area below the image -->
+    <!-- Meta + Title -->
     <div class="post-meta">
       <span class="post-category">Friction &amp; Flow</span>
       <span class="post-category">People</span>
@@ -258,31 +292,32 @@ body.blog-post-page {
     </div>
     <h1 class="post-hero-title">The Workaround That Became Permanent</h1>
     <p class="post-hero-excerpt">There's a workaround in your law firm that's been there so long nobody remembers why it started. It didn't begin as a workaround. It began as a solution.</p>
-    <div class="post-hero-rule"></div>
 
   </div>
 </div>
 
-<!-- Article Body -->
-<article class="post-body">
+<!-- Article Body — full-width navy -->
+<div class="post-article">
+  <article class="post-article-inner">
 
-  <p>Maybe a partner left and someone inherited their files without a handover. Maybe the billing software couldn't do what you needed, so someone built a spreadsheet to fill the gap. Maybe a client had an unusual requirement that became, over time, just the way things are done. Whatever the origin, the patch held. And because it held, nobody touched it.</p>
+    <p>Maybe a partner left and someone inherited their files without a handover. Maybe the billing software couldn't do what you needed, so someone built a spreadsheet to fill the gap. Maybe a client had an unusual requirement that became, over time, just the way things are done. Whatever the origin, the patch held. And because it held, nobody touched it.</p>
 
-  <p>That's how workarounds survive. Not because they work well — because they work well enough, and changing them feels riskier than leaving them alone. There's institutional memory locked inside them. There's someone who knows the steps, even if they've never written them down. There's a quiet understanding among the people who touch it: don't ask too many questions.</p>
+    <p>That's how workarounds survive. Not because they work well — because they work well enough, and changing them feels riskier than leaving them alone. There's institutional memory locked inside them. There's someone who knows the steps, even if they've never written them down. There's a quiet understanding among the people who touch it: don't ask too many questions.</p>
 
-  <div class="post-pullquote">The cost doesn't show up on a balance sheet. It shows up in the extra thirty minutes it takes to prepare a matter file.</div>
+    <div class="post-pullquote">The cost doesn't show up on a balance sheet. It shows up in the extra thirty minutes it takes to prepare a matter file.</div>
 
-  <p>The cost doesn't show up on a balance sheet. It shows up in the extra thirty minutes it takes to prepare a matter file. In the associate who re-enters the same information in three different places because the systems don't talk to each other. In the partner who keeps a separate tracking sheet because she doesn't trust the official one. In the onboarding that takes twice as long as it should because the process only lives in one person's head.</p>
+    <p>The cost doesn't show up on a balance sheet. It shows up in the extra thirty minutes it takes to prepare a matter file. In the associate who re-enters the same information in three different places because the systems don't talk to each other. In the partner who keeps a separate tracking sheet because she doesn't trust the official one. In the onboarding that takes twice as long as it should because the process only lives in one person's head.</p>
 
-  <p>None of these feel like crises. That's the problem. They feel like the job.</p>
+    <p>None of these feel like crises. That's the problem. They feel like the job.</p>
 
-  <p>The firms that run well aren't the ones that have eliminated all complexity — legal work is complex by nature. They're the ones that can distinguish between complexity that's inherent to the work and complexity that's been accidentally engineered into how the work gets done. Those are very different things, and they have very different solutions.</p>
+    <p>The firms that run well aren't the ones that have eliminated all complexity — legal work is complex by nature. They're the ones that can distinguish between complexity that's inherent to the work and complexity that's been accidentally engineered into how the work gets done. Those are very different things, and they have very different solutions.</p>
 
-  <p>When you look clearly at how your firm actually operates — not how it's supposed to operate, not how it operated five years ago — you start to see the workarounds for what they are: decisions made under pressure that never got revisited. Most of them made sense once. Some of them still do. But a surprising number are just friction that everyone has quietly agreed to live with.</p>
+    <p>When you look clearly at how your firm actually operates — not how it's supposed to operate, not how it operated five years ago — you start to see the workarounds for what they are: decisions made under pressure that never got revisited. Most of them made sense once. Some of them still do. But a surprising number are just friction that everyone has quietly agreed to live with.</p>
 
-  <div class="post-pullquote">The question isn't whether your firm has workarounds. Every firm does. The question is whether you're running them, or they're running you.</div>
+    <div class="post-pullquote">The question isn't whether your firm has workarounds. Every firm does. The question is whether you're running them, or they're running you.</div>
 
-</article>
+  </article>
+</div>
 
 <!-- CTA -->
 <div class="post-cta">
