@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Calculator — Practice Smarts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/calculator.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="calc-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="calc-eyebrow">Value Calculator</p>
+    <h1 class="calc-title">The number that changes the conversation.</h1>
+    <p class="calc-desc">Input a few details about your firm. See what inefficiency is costing you annually — in time, in money, and in people. Adjust the inputs to reflect your reality. The calculator does the rest.</p>
+  </div>
+</div>
+
+<div class="calc-page">
+  <div class="calc-grid">
+    <div class="inputs-panel">
+      <div class="inputs-header">
+        <span class="inputs-header-title">Your Firm</span>
+        <button class="reset-btn" onclick="resetDefaults()">Reset defaults</button>
+      </div>
+      <div class="inputs-body">
+        <div class="input-group">
+          <p class="group-label">Firm profile</p>
+          <div class="sl-row"><div class="sl-meta"><label for="annual-revenue">Annual firm revenue</label><span class="val" id="rev-out">$1.2M</span></div><input type="range" id="annual-revenue" min="300000" max="5000000" value="1200000" step="50000"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="fee-earners">Fee earners</label><span class="val" id="fee-out">5</span></div><input type="range" id="fee-earners" min="1" max="30" value="5" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="support-staff">Support staff</label><span class="val" id="support-out">3</span></div><input type="range" id="support-staff" min="0" max="20" value="3" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="billing-rate">Avg. billing rate (fee earner)</label><span class="val" id="billing-out">$450 /hr</span></div><input type="range" id="billing-rate" min="200" max="800" value="450" step="10"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="support-rate">Support staff cost</label><span class="val" id="srate-out">$45 /hr</span></div><input type="range" id="support-rate" min="25" max="90" value="45" step="1"></div>
+        </div>
+        <div class="input-group">
+          <p class="group-label">Program assumptions</p>
+          <div class="sl-row"><div class="sl-meta"><label for="hours-saved">Hours saved per person, per week</label><span class="val" id="hours-out">4 hrs</span></div><input type="range" id="hours-saved" min="2" max="7" value="4" step="1"></div>
+          <div class="sl-row highlighted"><div class="sl-meta"><label for="conversion-rate">Recovered hours converted to billing</label><span class="val" id="conv-out">60%</span></div><input type="range" id="conversion-rate" min="30" max="90" value="60" step="5"><p class="conversion-note">Not every recovered hour becomes a billed hour — some becomes breathing room, thinking time, or professional development. Set this to what feels realistic for your firm.</p></div>
+          <div class="sl-row"><div class="sl-meta"><label for="absence-days">Team absence coverage days / yr</label><span class="val" id="absence-out">20 days</span></div><input type="range" id="absence-days" min="5" max="80" value="20" step="1"></div>
+        </div>
+        <div class="input-group">
+          <p class="group-label">Departure cost model</p>
+          <span class="track-badge fee">Fee earner departure</span>
+          <div class="sl-row"><div class="sl-meta"><label for="fee-ad-spend">Advertising spend per hire</label><span class="val" id="fee-ad-out">$2,500</span></div><input type="range" id="fee-ad-spend" min="500" max="10000" value="2500" step="100"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="fee-owner-hrs">Owner interview &amp; selection hours</label><span class="val" id="fee-owner-out">5 hrs</span></div><input type="range" id="fee-owner-hrs" min="1" max="20" value="5" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="fee-admin-hrs">Admin interview &amp; process hours</label><span class="val" id="fee-admin-out">10 hrs</span></div><input type="range" id="fee-admin-hrs" min="1" max="25" value="10" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="fee-dep-years">One departure avoided every</label><span class="val" id="fee-dep-out">3 years</span></div><input type="range" id="fee-dep-years" min="1" max="7" value="3" step="1"></div>
+          <div class="track-divider"></div>
+          <span class="track-badge adm">Admin staff departure</span>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-ad-spend">Advertising spend per hire</label><span class="val" id="adm-ad-out">$1,500</span></div><input type="range" id="adm-ad-spend" min="200" max="5000" value="1500" step="100"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-owner-hrs">Owner interview &amp; selection hours</label><span class="val" id="adm-owner-out">3 hrs</span></div><input type="range" id="adm-owner-hrs" min="1" max="15" value="3" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-admin-hrs">Admin interview &amp; process hours</label><span class="val" id="adm-admin-out">5 hrs</span></div><input type="range" id="adm-admin-hrs" min="1" max="20" value="5" step="1"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-slow-abs">Fee earner hours absorbed / day — slowdown</label><span class="val" id="adm-slow-out">0.5 hrs</span></div><input type="range" id="adm-slow-abs" min="0.25" max="2" value="0.5" step="0.25"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-ramp-abs">Fee earner hours absorbed / day — ramp-up</label><span class="val" id="adm-ramp-out">0.75 hrs</span></div><input type="range" id="adm-ramp-abs" min="0.25" max="2" value="0.75" step="0.25"></div>
+          <div class="sl-row"><div class="sl-meta"><label for="adm-dep-years">One departure avoided every</label><span class="val" id="adm-dep-out">3 years</span></div><input type="range" id="adm-dep-years" min="1" max="7" value="3" step="1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-panel">
+      <div class="total-card"><p class="total-eyebrow">Estimated Annual Value</p><p class="total-number" id="total-value">$0</p><p class="total-monthly" id="monthly-value">— per month</p><p class="total-per-person" id="per-person">— per person, per year</p><div class="rev-bar-wrap"><div class="rev-bar-header"><span>Value as a share of revenue</span><span id="rev-pct-label">—</span></div><div class="rev-bar-track"><div class="rev-bar-fill" id="rev-bar" style="width:0%;"></div></div><p class="rev-bar-note" id="rev-bar-note">—</p></div></div>
+      <div class="pillar-grid">
+        <div class="pillar-card"><div class="pillar-dot-label"><span class="pillar-dot" style="background:var(--blue);"></span><span class="pillar-name">Recovered time</span></div><p class="pillar-value" id="time-value">$0</p><p class="pillar-sub" id="time-sub">at 60% conversion</p></div>
+        <div class="pillar-card"><div class="pillar-dot-label"><span class="pillar-dot" style="background:var(--teal);"></span><span class="pillar-name">Absence coverage</span></div><p class="pillar-value" id="absence-value">$0</p></div>
+      </div>
+      <div class="dep-grid">
+        <div class="dep-card"><div class="pillar-dot-label"><span class="pillar-dot" style="background:var(--amber);"></span><span class="pillar-name">Fee earner departure (annualised)</span></div><p class="pillar-value" id="fee-dep-value">$0</p><div class="breakdown"><p class="breakdown-title">Cost per departure</p><div class="brow"><span>Advertising</span><span id="fb-ad">—</span></div><div class="brow"><span>Owner time</span><span id="fb-owner">—</span></div><div class="brow"><span>Admin time</span><span id="fb-admin">—</span></div><div class="brow"><span>Slowdown — 2 mths, 50% output</span><span id="fb-slow">—</span></div><div class="brow"><span>Ramp-up — 3 mths, 35% output</span><span id="fb-ramp">—</span></div><div class="brow btotal"><span>Total per departure</span><span id="fb-total">—</span></div><div class="brow bannu"><span id="fb-freq-label">÷ 3 years</span><span id="fb-annu">—</span></div></div></div>
+        <div class="dep-card"><div class="pillar-dot-label"><span class="pillar-dot" style="background:var(--coral);"></span><span class="pillar-name">Admin departure (annualised)</span></div><p class="pillar-value" id="adm-dep-value">$0</p><div class="breakdown"><p class="breakdown-title">Cost per departure</p><div class="brow"><span>Advertising</span><span id="ab-ad">—</span></div><div class="brow"><span>Owner time</span><span id="ab-owner">—</span></div><div class="brow"><span>Admin time</span><span id="ab-admin">—</span></div><div class="brow"><span>Slowdown absorption — 2 mths</span><span id="ab-slow">—</span></div><div class="brow"><span>Ramp-up absorption — 3 mths</span><span id="ab-ramp">—</span></div><div class="brow btotal"><span>Total per departure</span><span id="ab-total">—</span></div><div class="brow bannu"><span id="ab-freq-label">÷ 3 years</span><span id="ab-annu">—</span></div></div></div>
+      </div>
+      <div class="chart-section"><div class="chart-header"><p class="chart-title">Value breakdown</p><div class="chart-legend"><span class="legend-item"><span class="legend-dot" style="background:var(--blue);"></span>Recovered time</span><span class="legend-item"><span class="legend-dot" style="background:var(--teal);"></span>Absence coverage</span><span class="legend-item"><span class="legend-dot" style="background:var(--amber);"></span>Fee earner departure</span><span class="legend-item"><span class="legend-dot" style="background:var(--coral);"></span>Admin departure</span></div></div><div class="chart-wrap"><canvas id="valueChart" role="img" aria-label="Value breakdown chart"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="pricing-block">
+    <div><p class="pricing-eyebrow">What Practice Smarts Costs</p><p class="pricing-body">Practice Smarts costs between $2,500 and $3,000 per month. Compare that to the number above. If after the first month the value isn't clear, we stop — no further commitment, and you keep everything we've built.</p><p class="pricing-sub">Fees vary by firm size and scope. The standard engagement runs six months — enough time to design, implement, and embed meaningful change.</p></div>
+    <div class="pricing-exposure"><p class="exposure-label">Your exposure</p><p class="exposure-num">$2,500</p><p class="exposure-note">One month.<br>That's it.</p></div>
+  </div>
+
+  <div class="calc-footer">
+    <p class="methodology"><strong>Methodology.</strong> Based on 48 working weeks per year and 65% billable utilisation (~113 billable hours per month). Recovered time applies the conversion rate to reflect that not all saved hours translate directly to billing — the remainder represents breathing room, professional development, and improved quality of work. Absence coverage assumes a 30% improvement in handover efficiency. Fee earner departure uses a lost billing model. Admin departure uses a fee earner absorption model, costed at the billing rate. Working days per month at 21.67. All figures are estimates intended to illustrate order of magnitude; actual outcomes will vary by firm.</p>
+    <div class="cta-block"><p class="cta-label">Ready to explore what's possible?</p><a class="cta-btn" href="../index.html#contact">Book a conversation</a><p class="cta-sub">practicesmarts.com.au</p></div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../js/components.js"></script>
+<script>
+loadNav('main');
+loadFooter('simple');
+
+var calcChart = null;
+var D={rev:1200000,fe:5,ss:3,br:450,sr:45,hw:4,conv:60,ad:20,feeAd:2500,feeOwner:5,feeAdmin:10,feeDy:3,admAd:1500,admOwner:3,admAdmin:5,admSlow:0.5,admRamp:0.75,admDy:3};
+var BHM=40*4.33*0.65,WDM=21.67;
+function fmtRev(n){if(n>=1000000)return '$'+(n/1000000).toFixed(n%1000000===0?0:1)+'M';return '$'+Math.round(n/1000)+'k';}
+function g(id){var el=document.getElementById(id);return el?+el.value:0;}
+function s(id,val){var el=document.getElementById(id);if(el)el.textContent=val;}
+function calc(){
+  var rev=g('annual-revenue'),fe=g('fee-earners'),ss=g('support-staff'),br=g('billing-rate'),sr=g('support-rate');
+  var hw=g('hours-saved'),conv=g('conversion-rate'),ad=g('absence-days');
+  var feeAd=g('fee-ad-spend'),feeOh=g('fee-owner-hrs'),feeAh=g('fee-admin-hrs'),feeDy=g('fee-dep-years');
+  var admAd=g('adm-ad-spend'),admOh=g('adm-owner-hrs'),admAh=g('adm-admin-hrs'),admSlow=g('adm-slow-abs'),admRamp=g('adm-ramp-abs'),admDy=g('adm-dep-years');
+  s('rev-out',fmtRev(rev));s('fee-out',fe);s('support-out',ss);s('billing-out','$'+br+' /hr');s('srate-out','$'+sr+' /hr');
+  s('hours-out',hw+' hrs');s('conv-out',conv+'%');s('absence-out',ad+' days');
+  s('fee-ad-out','$'+feeAd.toLocaleString('en-AU'));s('fee-owner-out',feeOh+' hrs');s('fee-admin-out',feeAh+' hrs');
+  s('fee-dep-out',feeDy+(feeDy===1?' year':' years'));s('adm-ad-out','$'+admAd.toLocaleString('en-AU'));
+  s('adm-owner-out',admOh+' hrs');s('adm-admin-out',admAh+' hrs');s('adm-slow-out',admSlow+' hrs');s('adm-ramp-out',admRamp+' hrs');s('adm-dep-out',admDy+(admDy===1?' year':' years'));
+  var cr=conv/100,timeVal=((fe*hw*br*48)+(ss*hw*sr*48))*cr,absVal=ad*(br*8)*0.30;
+  var fbSlow=2*BHM*br*0.50,fbRamp=3*BHM*br*0.65,fbOwner=feeOh*br,fbAdmin=feeAh*sr;
+  var fbTotal=feeAd+fbOwner+fbAdmin+fbSlow+fbRamp,feeDepVal=fbTotal/feeDy;
+  var abSlow=2*WDM*admSlow*br,abRamp=3*WDM*admRamp*br,abOwner=admOh*br,abAdmin=admAh*sr;
+  var abTotal=admAd+abOwner+abAdmin+abSlow+abRamp,admDepVal=abTotal/admDy;
+  var total=timeVal+absVal+feeDepVal+admDepVal,people=fe+Math.max(ss,1),pct=(total/rev)*100,pctDisplay=Math.round(pct*10)/10;
+  s('total-value','$'+Math.round(total).toLocaleString('en-AU'));
+  s('monthly-value','$'+Math.round(total/12).toLocaleString('en-AU')+' per month');
+  s('per-person','$'+Math.round(total/people).toLocaleString('en-AU')+' per person, per year');
+  s('rev-pct-label',pctDisplay+'%');
+  var bar=document.getElementById('rev-bar');if(bar)bar.style.width=Math.min(pct,100)+'%';
+  var verdict=pct<8?'conservative relative to revenue — a strong starting position':pct<15?'solid and defensible relative to revenue':pct<22?'meaningful relative to revenue — worth pressure-testing key inputs':'significant relative to revenue — consider adjusting the conversion rate';
+  s('rev-bar-note',pctDisplay+'% of '+fmtRev(rev)+' annual revenue — '+verdict);
+  s('time-value','$'+Math.round(timeVal).toLocaleString('en-AU'));s('time-sub','at '+conv+'% conversion');
+  s('absence-value','$'+Math.round(absVal).toLocaleString('en-AU'));s('fee-dep-value','$'+Math.round(feeDepVal).toLocaleString('en-AU'));s('adm-dep-value','$'+Math.round(admDepVal).toLocaleString('en-AU'));
+  s('fb-ad','$'+Math.round(feeAd).toLocaleString('en-AU'));s('fb-owner','$'+Math.round(fbOwner).toLocaleString('en-AU'));s('fb-admin','$'+Math.round(fbAdmin).toLocaleString('en-AU'));
+  s('fb-slow','$'+Math.round(fbSlow).toLocaleString('en-AU'));s('fb-ramp','$'+Math.round(fbRamp).toLocaleString('en-AU'));s('fb-total','$'+Math.round(fbTotal).toLocaleString('en-AU'));
+  s('fb-freq-label','÷ '+feeDy+(feeDy===1?' year':' years'));s('fb-annu','$'+Math.round(feeDepVal).toLocaleString('en-AU')+' /yr');
+  s('ab-ad','$'+Math.round(admAd).toLocaleString('en-AU'));s('ab-owner','$'+Math.round(abOwner).toLocaleString('en-AU'));s('ab-admin','$'+Math.round(abAdmin).toLocaleString('en-AU'));
+  s('ab-slow','$'+Math.round(abSlow).toLocaleString('en-AU'));s('ab-ramp','$'+Math.round(abRamp).toLocaleString('en-AU'));s('ab-total','$'+Math.round(abTotal).toLocaleString('en-AU'));
+  s('ab-freq-label','÷ '+admDy+(admDy===1?' year':' years'));s('ab-annu','$'+Math.round(admDepVal).toLocaleString('en-AU')+' /yr');
+  if(calcChart){calcChart.data.datasets[0].data=[Math.round(timeVal),Math.round(absVal),Math.round(feeDepVal),Math.round(admDepVal)];calcChart.update('none');}
+}
+function resetDefaults(){
+  var f=['annual-revenue','fee-earners','support-staff','billing-rate','support-rate','hours-saved','conversion-rate','absence-days','fee-ad-spend','fee-owner-hrs','fee-admin-hrs','fee-dep-years','adm-ad-spend','adm-owner-hrs','adm-admin-hrs','adm-slow-abs','adm-ramp-abs','adm-dep-years'];
+  var v=[D.rev,D.fe,D.ss,D.br,D.sr,D.hw,D.conv,D.ad,D.feeAd,D.feeOwner,D.feeAdmin,D.feeDy,D.admAd,D.admOwner,D.admAdmin,D.admSlow,D.admRamp,D.admDy];
+  f.forEach(function(id,i){var el=document.getElementById(id);if(el)el.value=v[i];});calc();
+}
+
+// Init chart
+var canvas=document.getElementById('valueChart');
+if(canvas&&typeof Chart!=='undefined'){
+  calcChart=new Chart(canvas,{type:'bar',data:{labels:['Recovered time','Absence coverage','Fee earner departure','Admin departure'],datasets:[{data:[0,0,0,0],backgroundColor:['#2a5fad','#1a7a60','#C4853A','#b84f3a'],borderRadius:3,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return '  $'+Math.round(c.raw).toLocaleString('en-AU');}}}},scales:{x:{ticks:{callback:function(v){return v>=1000000?'$'+(v/1000000).toFixed(1)+'m':'$'+Math.round(v/1000)+'k';},font:{size:11,family:'Jost'},color:'#8a95a8'},grid:{color:'rgba(0,0,0,0.04)'},border:{display:false}},y:{ticks:{font:{size:11,family:'Jost'},color:'#4a5670'},grid:{display:false},border:{display:false}}}}});
+  document.querySelectorAll('input[type=range]').forEach(function(el){el.addEventListener('input',calc);});
+  calc();
+}
+</script>
+</body>
+</html>

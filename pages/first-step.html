@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Step — Practice Smarts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/first-step.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">The First Step Towards Practice Flow</p>
+    <h1 class="hero-title">Three questions.<br>A clear picture of what's possible.</h1>
+    <p class="hero-body">Answer honestly. The more accurate your inputs, the more useful your result. This takes five minutes — and what you see at the end might surprise you.</p>
+  </div>
+</div>
+
+<div class="form-page">
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <!-- STEP 1 -->
+  <div class="step active" id="step1">
+    <div class="step-header">
+      <div class="step-num">01</div>
+      <div>
+        <p class="step-question">What is the annual cost of friction in your firm?</p>
+        <p class="step-hint">If you've used our <a href="calculator.html">value calculator</a>, enter that number below. If not, now is the time — it takes four minutes and gives you a number you can work with.</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="input-row">
+        <span class="input-prefix">$</span>
+        <input type="number" id="q1-input" placeholder="0" min="0" step="1000">
+        <span class="input-unit">per year</span>
+      </div>
+      <button class="step-cta" onclick="submitQ1()" id="q1-btn" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- Running total -->
+  <div class="running-total" id="running-total">
+    <p class="rt-label">Your numbers so far</p>
+    <div class="rt-row"><span class="rt-row-label">Annual cost of friction</span><span class="rt-row-value" id="rt-annual">—</span></div>
+    <div class="rt-row" id="rt-total-row" style="display:none;"><span class="rt-row-label">Total cost over that period</span><span class="rt-row-value" id="rt-total">—</span></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <div class="step-header">
+      <div class="step-num">02</div>
+      <div>
+        <p class="step-question">How long has the friction been there?</p>
+        <p class="step-hint">Most firms have carried inefficiency for longer than they realise. Be honest — the number that follows will be more useful for it.</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="years-row">
+        <button class="year-btn" onclick="selectYears(this, 1)">1 year</button>
+        <button class="year-btn" onclick="selectYears(this, 2)">2 years</button>
+        <button class="year-btn" onclick="selectYears(this, 3)">3 years</button>
+        <button class="year-btn" onclick="selectYears(this, 5)">5 years</button>
+        <button class="year-btn" onclick="selectYears(this, 7)">7 years</button>
+        <button class="year-btn" onclick="selectYears(this, 10)">10+ years</button>
+      </div>
+      <button class="step-cta" onclick="submitQ2()" id="q2-btn" disabled>See my number →</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-panel" id="result-panel"></div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3" style="display:none;">
+    <div class="step-header">
+      <div class="step-num">03</div>
+      <div>
+        <p class="step-question" id="q3-question">If we recovered that for you this year — what would you do with it?</p>
+        <p class="step-hint">Be honest. A family holiday, a new hire, paying down debt, growing into a new area — whatever it means for you. This is the question that matters most.</p>
+      </div>
+    </div>
+    <div class="step-body">
+      <textarea id="q3-input" placeholder="Write whatever comes to mind. There's no wrong answer."></textarea>
+      <button class="step-cta" onclick="submitQ3()" style="margin-top:14px;">Book a conversation →</button>
+    </div>
+  </div>
+
+  <!-- Calendly -->
+  <div class="calendly-section" id="calendly-section" style="display:none; margin-top:14px;">
+    <div class="result-high" style="padding:36px 40px;">
+      <p class="result-eyebrow">Next Step</p>
+      <p class="result-narrative" style="margin-bottom:24px;">You've done the hard part. You know your number and what you'd do with it. The next step is a conversation — no pitch, no pressure. Just an honest look at whether Practice Flow is the right fit.</p>
+      <div style="background:var(--white);border-radius:2px;padding:36px;text-align:center;">
+        <p style="font-size:0.88rem;color:var(--grey-mid);margin-bottom:16px;line-height:1.7;">Schedule a conversation with Practice Smarts.<br>Usually 30 minutes. No obligation.</p>
+        <a href="https://calendly.com/YOUR-LINK-HERE" target="_blank" class="cal-btn">Choose a time that suits you →</a>
+        <p class="cal-note" style="margin-top:12px;">Can't find a time? Email us at hello@practicesmarts.com.au</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../js/components.js"></script>
+<script>
+loadNav('main');
+loadFooter('simple');
+
+var q1Value = 0, q2Years = 0, THRESHOLD = 80000, CALENDLY_URL = 'https://calendly.com/YOUR-LINK-HERE';
+function fmt(n) { return '$' + Math.round(n).toLocaleString('en-AU'); }
+
+document.addEventListener('input', function(e) {
+  if (e.target && e.target.id === 'q1-input') {
+    var btn = document.getElementById('q1-btn');
+    if (btn) btn.disabled = !(parseFloat(e.target.value) > 0);
+  }
+});
+
+function submitQ1() {
+  q1Value = parseFloat(document.getElementById('q1-input').value);
+  if (!q1Value || q1Value <= 0) return;
+  lockStep('step1');
+  document.getElementById('rt-annual').textContent = fmt(q1Value);
+  document.getElementById('running-total').classList.add('visible');
+  activateStep('step2');
+  document.getElementById('progress').style.width = '50%';
+  document.getElementById('step2').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function selectYears(btn, y) {
+  q2Years = y;
+  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  var q2btn = document.getElementById('q2-btn');
+  if (q2btn) q2btn.disabled = false;
+  document.getElementById('rt-total').textContent = fmt(q1Value * q2Years);
+  document.getElementById('rt-total-row').style.display = 'flex';
+}
+
+function submitQ2() {
+  if (!q2Years) return;
+  lockStep('step2');
+  document.getElementById('progress').style.width = '100%';
+  var annual = q1Value, total = q1Value * q2Years, recovery = annual * 0.75, roi = (recovery / 30000).toFixed(1);
+  var el = document.getElementById('result-panel');
+  el.innerHTML = annual >= THRESHOLD ? buildHigh(annual, total, recovery, roi) : buildLow(annual, total);
+  el.classList.add('visible');
+  var step3 = document.getElementById('step3');
+  if (step3) {
+    step3.style.display = 'block';
+    var q3q = document.getElementById('q3-question');
+    if (q3q && annual >= THRESHOLD) {
+      q3q.textContent = 'If we recovered ' + fmt(recovery) + ' for you this year — what would you do with it?';
+    }
+    step3.classList.add('active');
+  }
+  setTimeout(function() { el.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+}
+
+function lockStep(id) { var s=document.getElementById(id); if(s){s.classList.remove('active');s.classList.add('completed','locked');} }
+function activateStep(id) { var s=document.getElementById(id); if(s) s.classList.add('active'); }
+
+function buildHigh(annual,total,recovery,roi) {
+  return '<div class="result-high">' +
+    '<p class="result-eyebrow">Your Practice Flow Number</p>' +
+    '<div class="result-numbers">' +
+      '<div class="result-num-card"><p class="result-num-label">Annual cost of friction</p><p class="result-num-value white">'+fmt(annual)+'</p></div>' +
+      '<div class="result-num-card"><p class="result-num-label">75% recovery / year</p><p class="result-num-value">'+fmt(recovery)+'</p></div>' +
+      '<div class="result-num-card"><p class="result-num-label">Return on engagement</p><p class="result-num-value green">'+roi+'x</p></div>' +
+    '</div>' +
+    '<p class="result-narrative">Your firm is carrying an estimated <strong>'+fmt(annual)+'</strong> in annual friction. Over the time you\'ve carried it, that\'s <strong>'+fmt(total)+'</strong>. A 75% improvement would recover <strong>'+fmt(recovery)+'</strong> annually. Against a maximum engagement cost of $30,000, that\'s a <strong>'+roi+'x return</strong>. Before accounting for what a better-run firm does for your team, your clients, and your own peace of mind.</p>' +
+  '</div>';
+}
+
+function buildLow(annual,total) {
+  return '<div class="result-low">' +
+    '<h3 class="result-low-title">Thank you — we\'ve received your responses.</h3>' +
+    '<p class="result-low-body">Your firm is carrying an estimated <strong>'+fmt(annual)+'</strong> in annual friction — a total of <strong>'+fmt(total)+'</strong> over the period you\'ve carried it. We\'ll review your responses personally and come back to you within 24 hours.</p>' +
+    '<p class="result-low-note">We only take on engagements we\'re confident will deliver meaningful value. That conversation starts here.</p>' +
+  '</div>';
+}
+
+function submitQ3() {
+  var q3=document.getElementById('q3-input');
+  if(!q3||q3.value.trim().length<3){if(q3)q3.focus();return;}
+  lockStep('step3');
+  var cal=document.getElementById('calendly-section');
+  if(cal){
+    cal.style.display='block';
+    setTimeout(function(){cal.scrollIntoView({behavior:'smooth',block:'start'});},100);
+  }
+}
+</script>
+</body>
+</html>

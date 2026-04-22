@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights — Practice Smarts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/blog.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="blog-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-rule"></div>
+  <div class="blog-hero-inner">
+    <p class="blog-hero-eyebrow">Insights &amp; Ideas</p>
+    <h1 class="blog-hero-title">Practice thinking for firms that are <em>done running on instinct.</em></h1>
+    <p class="blog-hero-body">Practical observations, honest perspectives, and hard-won ideas on what it actually takes to move from a practice that runs on the owner to one that runs on process.</p>
+  </div>
+</div>
+
+<div class="blog-content">
+
+  <!-- FILTERS -->
+  <div class="blog-filters">
+    <span class="blog-filters-label">Topic</span>
+    <button class="blog-filter active" onclick="blogFilter('all',this)">All</button>
+    <button class="blog-filter" onclick="blogFilter('friction',this)">Friction &amp; Flow</button>
+    <button class="blog-filter" onclick="blogFilter('people',this)">People</button>
+    <button class="blog-filter" onclick="blogFilter('systems',this)">Systems</button>
+    <button class="blog-filter" onclick="blogFilter('growth',this)">Growth</button>
+    <button class="blog-filter" onclick="blogFilter('leadership',this)">Leadership</button>
+  </div>
+
+  <!-- FEATURED POST -->
+  <div class="blog-featured reveal" data-btopic="friction" style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--navy);border-radius:2px;overflow:hidden;margin-bottom:48px;cursor:pointer;">
+    <div style="background:var(--navy-mid);position:relative;overflow:hidden;min-height:360px;display:flex;align-items:flex-end;padding:36px;">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;"></div>
+      <div style="font-family:'DM Serif Display',serif;font-size:8rem;color:rgba(255,255,255,0.04);line-height:1;position:absolute;bottom:-20px;right:20px;pointer-events:none;user-select:none;">01</div>
+      <p style="font-family:'DM Serif Display',serif;font-size:1.3rem;font-style:italic;color:rgba(255,255,255,0.55);line-height:1.5;position:relative;z-index:2;max-width:320px;border-left:3px solid var(--amber);padding-left:20px;">"You can't read the label from inside the bottle."</p>
+    </div>
+    <div style="padding:44px 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:var(--amber);"></div>
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;">
+          <span style="font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;background:rgba(196,133,58,0.2);color:var(--amber-light);border:1px solid rgba(196,133,58,0.3);border-radius:2px;">★ Featured</span>
+          <span style="font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:2px;">Friction &amp; Flow</span>
+        </div>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--white);line-height:1.25;margin-bottom:16px;">The Five Things That Happen When a Law Firm Outgrows the Way It Runs</h2>
+        <p style="font-size:0.92rem;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:28px;">There's a moment in the life of most small law firms when the growth that made the firm successful starts making it harder to run. It doesn't arrive with a memo. It arrives gradually, through a series of small signs that are easy to miss individually.</p>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:0.72rem;font-weight:500;color:rgba(255,255,255,0.3);">6 min read</span>
+        <span style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;color:var(--amber);">Read →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST GRID -->
+  <div id="blog-grid" class="blog-grid">
+    <div class="blog-card reveal" data-btopic="people"><p class="blog-topic">People</p><h3 class="blog-title">What Happens to a Law Firm When the Practice Manager Leaves</h3><p class="blog-excerpt">Most principals don't think much about what would happen if their practice manager resigned. Let me make it concrete.</p><div class="blog-card-footer"><span class="blog-readtime">5 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="friction"><p class="blog-topic">Friction &amp; Flow</p><h3 class="blog-title">The Workaround That Became Permanent</h3><p class="blog-excerpt">There's a workaround in your law firm that's been there so long nobody remembers why it started. It didn't begin as a workaround. It began as a solution.</p><div class="blog-card-footer"><span class="blog-readtime">4 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="systems"><p class="blog-topic">Systems</p><h3 class="blog-title">The LEAP Problem: Why the System Doesn't Fix the Process</h3><p class="blog-excerpt">LEAP is a good system. The problem isn't LEAP. The problem is that most firms implement it and then use it as a filing cabinet.</p><div class="blog-card-footer"><span class="blog-readtime">5 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="leadership"><p class="blog-topic">Leadership</p><h3 class="blog-title">The Principal Who Thought Everything Was Fine</h3><p class="blog-excerpt">He was polite but slightly puzzled about why he'd been referred. "Things are going well," he said. "I'm not sure what the problem is supposed to be."</p><div class="blog-card-footer"><span class="blog-readtime">6 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="people"><p class="blog-topic">People</p><h3 class="blog-title">The Real Cost of a Good Person Leaving a Law Firm</h3><p class="blog-excerpt">Most principals calculate the cost of a resignation at $10,000–$15,000. The actual number is usually three to four times that. Here's what gets missed.</p><div class="blog-card-footer"><span class="blog-readtime">5 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="growth"><p class="blog-topic">Growth</p><h3 class="blog-title">Why I Started Practice Smarts</h3><p class="blog-excerpt">I kept running into the same wall. Principals would commit to growing — and then the growth would arrive, and the firm couldn't absorb it. The bottleneck was always operational.</p><div class="blog-card-footer"><span class="blog-readtime">4 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="friction"><p class="blog-topic">Friction &amp; Flow</p><h3 class="blog-title">The Friday Afternoon Problem</h3><p class="blog-excerpt">It's 4pm on Friday. The week's work has moved — but not the way it was supposed to. Nobody did anything wrong. The week just moved the way weeks move without clear process.</p><div class="blog-card-footer"><span class="blog-readtime">3 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="leadership"><p class="blog-topic">Leadership</p><h3 class="blog-title">Running Well — or Running Well Despite Yourself?</h3><p class="blog-excerpt">The principals who think their firm runs well and the principals whose firms actually run well are not the same group. The overlap is smaller than you'd expect.</p><div class="blog-card-footer"><span class="blog-readtime">3 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div class="blog-card reveal" data-btopic="systems"><p class="blog-topic">Systems</p><h3 class="blog-title">AI, Applied Practically: Where It Actually Helps a Law Firm</h3><p class="blog-excerpt">AI in a professional services firm isn't just automation. It's also training, reviewing, and filling the gaps where your current systems fall short.</p><div class="blog-card-footer"><span class="blog-readtime">5 min read</span><span class="blog-readlink">Read →</span></div></div>
+    <div id="blog-empty" style="grid-column:1/-1;padding:60px;text-align:center;display:none;"><p style="font-size:0.95rem;font-weight:300;color:var(--grey-mid);">No articles in this topic yet — check back soon.</p></div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="blog-newsletter">
+    <div>
+      <p class="newsletter-eyebrow">New Thinking, Direct to You</p>
+      <h3 class="newsletter-title">One article per fortnight. Worth your time.</h3>
+      <p class="newsletter-body">No noise, no filler — just practical thinking on what it takes to run a better practice. Written by Roy West and the Practice Smarts team, for principals and practice managers who are ready to do something about it.</p>
+    </div>
+    <div class="newsletter-form">
+      <input type="text" placeholder="Your name">
+      <input type="email" placeholder="Your email address">
+      <button>Subscribe →</button>
+      <p class="newsletter-note">One article per fortnight. No spam. Unsubscribe any time.</p>
+    </div>
+  </div>
+
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../js/components.js"></script>
+<script>
+loadNav('main');
+loadFooter('full');
+
+function blogFilter(topic, btn) {
+  document.querySelectorAll('.blog-filter').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var cards = document.querySelectorAll('.blog-card[data-btopic]');
+  var featured = document.querySelector('.blog-featured');
+  var empty = document.getElementById('blog-empty');
+  var visibleCount = 0;
+
+  cards.forEach(function(card) {
+    if (topic === 'all' || card.getAttribute('data-btopic') === topic) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  if (featured) {
+    if (topic === 'all' || featured.getAttribute('data-btopic') === topic) {
+      featured.style.display = 'grid';
+    } else {
+      featured.style.display = 'none';
+    }
+  }
+
+  if (empty) empty.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
