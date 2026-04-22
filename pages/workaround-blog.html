@@ -22,6 +22,7 @@
   color: var(--amber, #c4853a);
   text-decoration: none;
   padding: 20px 64px;
+  background: var(--navy, #0e1726);
   transition: opacity 0.2s;
 }
 
@@ -29,28 +30,28 @@
   opacity: 0.7;
 }
 
-/* ── Hero Image Block ── */
-.post-image-block {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 64px;
+/* ── Hero Section ── */
+.post-hero {
+  background: var(--navy, #0e1726);
+  padding: 0 64px 48px;
 }
 
-.post-image-block img {
+.post-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Image as separate block ── */
+.post-hero-image {
   width: 100%;
   height: 420px;
   object-fit: cover;
   display: block;
   border-radius: 4px;
+  margin-bottom: 36px;
 }
 
-/* ── Title Section ── */
-.post-header {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 64px 0;
-}
-
+/* ── Title area ── */
 .post-meta {
   display: flex;
   align-items: center;
@@ -79,7 +80,7 @@
   color: rgba(255,255,255,0.35);
 }
 
-.post-header-title {
+.post-hero-title {
   font-family: 'DM Serif Display', serif;
   font-size: 2.6rem;
   color: var(--white, #fff);
@@ -87,7 +88,7 @@
   margin: 0 0 16px 0;
 }
 
-.post-header-excerpt {
+.post-hero-excerpt {
   font-family: 'Jost', sans-serif;
   font-size: 1.05rem;
   font-weight: 300;
@@ -97,7 +98,7 @@
   margin: 0 0 32px 0;
 }
 
-.post-header-rule {
+.post-hero-rule {
   width: 60px;
   height: 2px;
   background: var(--amber, #c4853a);
@@ -109,6 +110,7 @@
   max-width: 720px;
   margin: 0 auto;
   padding: 48px 32px 80px;
+  background: var(--navy, #0e1726);
 }
 
 .post-body p {
@@ -196,17 +198,14 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .post-image-block {
-    padding: 0 20px;
+  .post-hero {
+    padding: 0 20px 36px;
   }
-  .post-image-block img {
+  .post-hero-image {
     height: 240px;
     border-radius: 3px;
   }
-  .post-header {
-    padding: 28px 24px 0;
-  }
-  .post-header-title {
+  .post-hero-title {
     font-size: 1.8rem;
   }
   .post-body {
@@ -225,22 +224,25 @@
 <!-- Back to Blog -->
 <a href="blog.html" class="post-back">← Back to Insights</a>
 
-<!-- Image Block — fully visible, no overlay -->
-<div class="post-image-block">
-  <img src="../images/blog/blogimg-workaround.jpg" alt="The Workaround That Became Permanent">
-</div>
+<!-- Hero Section with navy background -->
+<div class="post-hero">
+  <div class="post-hero-inner">
 
-<!-- Title Section — separate from image -->
-<div class="post-header">
-  <div class="post-meta">
-    <span class="post-category">Friction &amp; Flow</span>
-    <span class="post-category">People</span>
-    <span class="post-category">Systems</span>
-    <span class="post-readtime">5 min read</span>
+    <!-- Image — fully visible, no overlay -->
+    <img src="../images/blog/blogimg-workaround.jpg" alt="The Workaround That Became Permanent" class="post-hero-image">
+
+    <!-- Title area below the image -->
+    <div class="post-meta">
+      <span class="post-category">Friction &amp; Flow</span>
+      <span class="post-category">People</span>
+      <span class="post-category">Systems</span>
+      <span class="post-readtime">5 min read</span>
+    </div>
+    <h1 class="post-hero-title">The Workaround That Became Permanent</h1>
+    <p class="post-hero-excerpt">There's a workaround in your law firm that's been there so long nobody remembers why it started. It didn't begin as a workaround. It began as a solution.</p>
+    <div class="post-hero-rule"></div>
+
   </div>
-  <h1 class="post-header-title">The Workaround That Became Permanent</h1>
-  <p class="post-header-excerpt">There's a workaround in your law firm that's been there so long nobody remembers why it started. It didn't begin as a workaround. It began as a solution.</p>
-  <div class="post-header-rule"></div>
 </div>
 
 <!-- Article Body -->
